@@ -33,5 +33,20 @@ toDoList.forEach((deal) => {
     </div>
     `;
 
-toDoListContainer.append(div.firstElementChild)
+  toDoListContainer.append(div.firstElementChild);
+});
+
+toDoListContainer.addEventListener("change", (event) => {
+  const changedCheckBox = event.target.closest("[data-deal-id]");
+  if (!changedCheckBox) {
+    return;
+  }
+
+  const deal = toDoList.find(
+    (deal) => deal.id == changedCheckBox.dataset.dealId
+  );
+  if (!deal) {
+    return;
+  }
+  deal.isDone = changedCheckBox.checked;
 });
